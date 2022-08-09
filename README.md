@@ -16,4 +16,4 @@ Take a look right [here](https://restfull-blog.herokuapp.com)
 - dotenv
 
 ## 🔐 License
-This project is [MIT License](LICENSE) licensed.
+This repo is [MIT License](LICENSE) licensed.
