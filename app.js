@@ -10,9 +10,6 @@ dotenv.config();
 const username = process.env.db_user;
 const password = process.env.password;
 
-console.log(username);
-console.log(password);
-
 const mongoDBClusterURI = `mongodb+srv://${username}:${password}@cluster0.4iyweli.mongodb.net/restful_blog_db?retryWrites=true&w=majority`;
 async function connectMongo() {
     try {
