@@ -3,7 +3,7 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 methodOverride = require('method-override'),
 expressSanitizer = require('express-sanitizer'),
-dotenv = require('dotenv');
+dotenv = require('dotenv'),
 app = express();
 dotenv.config();
 
