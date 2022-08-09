@@ -3,9 +3,25 @@ bodyParser = require('body-parser'),
 mongoose = require('mongoose'),
 methodOverride = require('method-override'),
 expressSanitizer = require('express-sanitizer'),
+dotenv = require('dotenv'),
 app = express();
+dotenv.config();
 
-// mongoose.connect('mongodb://localhost/restful_blog_db');
+const username = process.env.db_user;
+const password = process.env.password;
+
+console.log(username);
+console.log(password);
+
+const mongoDBClusterURI = `mongodb+srv://${username}:${password}@cluster0.4iyweli.mongodb.net/restful_blog_db?retryWrites=true&w=majority`;
+async function connectMongo() {
+    try {
+        await mongoose.connect(mongoDBClusterURI);
+        console.log('Successfully connected to mongoDB');
+    } catch { 
+        err => console.log(err, 'Something went wrong');
+    }
+}
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
@@ -98,10 +114,12 @@ app.delete('/posts/:id', (req, res) => {
     })
 });
 
-app.listen(3500, () => {
-    console.log('server started on port 3500');
-});
-
-// app.listen(process.env.PORT, process.env.IP, function() {
-//     console.log('server started');
+// app.listen(3500, () => {
+//     connectMongo();
+//     console.log('server started on port 3500');
 // });
+
+app.listen(process.env.PORT, process.env.IP, () => {
+    connectMongo();
+    console.log('server started');
+});
