@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple CRUD app to demonstrate restful routes application">
+    <title>Restful Blog</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a id="logo" class="nav-link" href="/">Restful <span class="logo">Blog</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/posts/new">New Post</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://github.com/fanifrancs/restful-blog">
+              <i class="fa-solid fa-code"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-3">
+      <div class="card">
+        <div class="card-body">
+          <h3 class="card-title text-center"><%= post.title %></h3>
+          <img src="<%= post.image %>" class="mx-auto d-block" alt="Cinque Terre" width="304" height="auto"> 
+          <p class="card-text text-center mt-2 text-secondary"><%= post.created.toDateString() %></p>
+          <p class="card-text text-center mt-2"><%- post.body %></p>
+          <a class="btn btn-outline-dark" href="/posts/<%= post._id %>/edit">Edit</a>
+          <form class="mt-2" action="/posts/<%= post._id %>?_method=delete" method="post">
+            <input class="btn btn-danger" type="submit" value="Delete">
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

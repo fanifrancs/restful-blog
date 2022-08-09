@@ -1,0 +1,24 @@
+{
+  "name": "restful-blog",
+  "version": "1.0.0",
+  "description": "A simple CRUD app to demonstrate the application of restful routes",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "restful",
+    "routes",
+    "CRUD"
+  ],
+  "author": "Francisco",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-sanitizer": "^1.0.6",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.5.1"
+  }
+}
