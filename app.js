@@ -1,16 +1,13 @@
-const express = require('express'),
-bodyParser = require('body-parser'),
-mongoose = require('mongoose'),
-methodOverride = require('method-override'),
-expressSanitizer = require('express-sanitizer'),
-dotenv = require('dotenv'),
-app = express();
-dotenv.config();
+const express      = require('express'),
+bodyParser         = require('body-parser'),
+mongoose           = require('mongoose'),
+methodOverride     = require('method-override'),
+expressSanitizer   = require('express-sanitizer'),
+dotenv             = require('dotenv').config(),
+app                = express();
 
-const username = process.env.db_user;
-const password = process.env.password;
+const mongoDBClusterURI = process.env.mongodb_cluster_URI;
 
-const mongoDBClusterURI = `mongodb+srv://${username}:${password}@cluster0.4iyweli.mongodb.net/restful_blog_db?retryWrites=true&w=majority`;
 async function connectMongo() {
     try {
         await mongoose.connect(mongoDBClusterURI);
@@ -19,6 +16,7 @@ async function connectMongo() {
         err => console.log(err, 'Something went wrong');
     }
 }
+
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
@@ -27,10 +25,7 @@ app.set('view engine', 'ejs');
 
 // I would have created and used header and footer partials for
 // my pages headers and footers but for some reason it just
-// does not work. If you try it and it works please contact
-// me and if you also know why it does not work please
-// contact me as well. Thanks : )
-// twitter @fanifrancs
+// does not work. 
 
 const postSchema = new mongoose.Schema({
     title: String,
@@ -111,12 +106,7 @@ app.delete('/posts/:id', (req, res) => {
     })
 });
 
-// app.listen(3500, () => {
-//     connectMongo();
-//     console.log('server started on port 3500');
-// });
-
-app.listen(process.env.PORT, process.env.IP, () => {
+app.listen(process.env.PORT || 3500, process.env.IP, () => {
     connectMongo();
     console.log('server started');
 });
